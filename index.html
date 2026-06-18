@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Przystań Zagać</title>
+    <!-- Ładny wygląd dzięki Tailwind CSS -->
+    <script src="https://jsdelivr.net"></script>
+    <style>
+        body { background-color: #f3f4f6; }
+    </style>
+</head>
+<body class="p-4 max-w-md mx-auto">
+
+    <div class="bg-white p-6 rounded-2xl shadow-xl mt-4">
+        <h1 class="text-2xl font-bold text-center text-emerald-700 mb-2">🏕️ Przystań Zagać</h1>
+        <p class="text-xs text-gray-500 text-center mb-6">Kalkulator pobytu dla znajomych</p>
+        
+        <!-- DNI -->
+        <div class="mb-4 flex justify-between items-center bg-gray-50 p-3 rounded-xl border border-gray-100">
+            <div>
+                <span class="font-semibold block">Liczba nocy</span>
+                <span id="discount-alert" class="text-xs text-amber-600 font-medium">Min. 5 nocy = 10% rabatu!</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="change('dni', -1)" class="w-10 h-10 bg-emerald-100 text-emerald-700 font-bold rounded-full text-xl">-</button>
+                <span id="v-dni" class="text-xl font-bold w-6 text-center">1</span>
+                <button onclick="change('dni', 1)" class="w-10 h-10 bg-emerald-600 text-white font-bold rounded-full text-xl">+</button>
+            </div>
+        </div>
+
+        <!-- OSOBY -->
+        <div class="space-y-3 mb-6">
+            <div class="flex justify-between items-center bg-gray-50 p-3 rounded-xl">
+                <div>
+                    <span class="font-semibold block">Dorośli</span>
+                    <span class="text-xs text-gray-500">20 zł / doba</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="change('dorosli', -1)" class="w-10 h-10 bg-emerald-100 text-emerald-700 font-bold rounded-full text-xl">-</button>
+                    <span id="v-dorosli" class="text-xl font-bold w-6 text-center">0</span>
+                    <button onclick="change('dorosli', 1)" class="w-10 h-10 bg-emerald-600 text-white font-bold rounded-full text-xl">+</button>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center bg-gray-50 p-3 rounded-xl">
+                <div>
+                    <span class="font-semibold block">Dzieci (3-12 lat)</span>
+                    <span class="text-xs text-gray-500">10 zł / doba</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="change('dzieci', -1)" class="w-10 h-10 bg-emerald-100 text-emerald-700 font-bold rounded-full text-xl">-</button>
+                    <span id="v-dzieci" class="text-xl font-bold w-6 text-center">0</span>
+                    <button onclick="change('dzieci', 1)" class="w-10 h-10 bg-emerald-600 text-white font-bold rounded-full text-xl">+</button>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center bg-gray-50 p-3 rounded-xl">
+                <div>
+                    <span class="font-semibold block">Dzieci (do 3 lat)</span>
+                    <span class="text-xs text-emerald-600 font-medium">Gratis</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="change('bobasy', -1)" class="w-10 h-10 bg-emerald-100 text-emerald-700 font-bold rounded-full text-xl">-</button>
+                    <span id="v-bobasy" class="text-xl font-bold w-6 text-center">0</span>
+                    <button onclick="change('bobasy', 1)" class="w-10 h-10 bg-emerald-600 text-white font-bold rounded-full text-xl">+</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- RODZAJ NOCLEGU -->
+        <div class="mb-6">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Rodzaj zakwaterowania (za dobę):</label>
+            <select id="v-nocleg" onchange="calculate()" class="w-full bg-gray-50 border border-gray-200 p-3 rounded-xl text-sm focus:outline-none focus:border-emerald-600">
+                <option value="brak">Brak (lub wspólny namiot ze znajomymi) - 0 zł</option>
+                <option value="maly_namiot">Mały namiot (do 2 os.) - 10 zł</option>
+                <option value="duzy_namiot">Duży namiot (3 os. i więcej) - 20 zł</option>
+                <option value="przyczepa">Przyczepa + samochód - 30 zł</option>
+                <option value="camper">Camper - 30 zł</option>
+            </select>
+        </div>
+
+        <!-- OPCJE DODATKOWE PŁATNE -->
+        <div class="space-y-3 border-t pt-4">
+            <label class="flex justify-between items-center bg-gray-50 p-3 rounded-xl cursor-pointer">
+                <div>
+                    <span class="font-semibold block">Podłączenie do prądu</span>
+                    <span class="text-xs text-gray-500">20 zł / doba</span>
+                </div>
+                <input type="checkbox" id="v-prad" onchange="calculate()" class="w-6 h-6 accent-emerald-600">
+            </label>
+
+            <div class="flex justify-between items-center bg-gray-50 p-3 rounded-xl">
+                <div>
+                    <span class="font-semibold block">Pranie (na żądanie)</span>
+                    <span class="text-xs text-gray-500">30 zł / jedno pranie</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="change('pranie', -1)" class="w-8 h-8 bg-emerald-100 text-emerald-700 font-bold rounded-full">-</button>
+                    <span id="v-pranie" class="font-bold w-4 text-center">0</span>
+                    <button onclick="change('pranie', 1)" class="w-8 h-8 bg-emerald-600 text-white font-bold rounded-full">+</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- W CENIE (GRATISY) -->
+        <div class="mt-4 p-3 bg-emerald-50 rounded-xl text-xs text-emerald-800 space-y-1">
+            <p class="font-bold mb-1">🎁 W cenie pobytu (0 zł):</p>
+            <p>• Zwierzęta domowe (pies, kot)</p>
+            <p>• Wstęp na plażę i atrakcje Przystani Zagać</p>
+            <p>• Drewno na ognisko & Parking</p>
+        </div>
+
+        <!-- PODSUMOWANIE -->
+        <div class="mt-6 border-t border-dashed pt-4 text-center">
+            <div id="rabat-info" class="text-sm text-emerald-600 font-bold hidden mb-2">🎉 Zastosowano rabat 10% za min. 5 nocy!</div>
+            <span class="text-gray-500 block text-xs uppercase tracking-wider font-semibold">Do zapłaty łącznie</span>
+            <div class="text-5xl font-black text-emerald-800 mt-2 tracking-tight"><span id="total">0</span> zł</div>
+        </div>
+    </div>
+
+    <!-- LOGIKA KALKULATORA -->
+    <script>
+        const CENNIK = {
+            dorosly: 20,
+            dzieci: 10,
+            maly_namiot: 10,
+            duzy_namiot: 20,
+            przyczepa: 30,
+            camper: 30,
+            brak: 0,
+            prad: 20,
+            pranie: 30
+        };
+
+        // Formularz domyślnie wyzerowany
+        const dane = { dni: 1, dorosli: 0, dzieci: 0, bobasy: 0, pranie: 0 };
+
+        function change(pole, wartosc) {
+            dane[pole] = Math.max(0, dane[pole] + wartosc);
+            if (pole === 'dni' && dane[pole] === 0) dane[pole] = 1; // Minimum 1 noc
+            document.getElementById(`v-${pole}`).innerText = dane[pole];
+            calculate();
+        }
+
+        function calculate() {
+            const dni = dane.dni;
+            
+            // 1. Koszty dobowe podstawowe
+            const kosztDoroslych = dane.dorosli * CENNIK.dorosly * dni;
+            const kosztDzieci = dane.dzieci * CENNIK.dzieci * dni;
+            
+            // 2. Koszt zakwaterowania
+            const typNoclegu = document.getElementById('v-nocleg').value;
+            const kosztNoclegu = CENNIK[typNoclegu] * dni;
+            
+            // 3. Prąd (dobowy)
+            const kosztPradu = document.getElementById('v-prad').checked ? CENNIK.prad * dni : 0;
+
+            // Suma kosztów zależnych od liczby dni (podlegających rabatowi)
+            let sumaDobowa = kosztDoroslych + kosztDzieci + kosztNoclegu + kosztPradu;
+
+            // 4. Rabat 10% od 5 nocy
+            if (dni >= 5) {
+                sumaDobowa = sumaDobowa * 0.9;
+                document.getElementById('rabat-info').classList.remove('hidden');
+                document.getElementById('discount-alert').innerText = "Rabat 10% aktywny! 🎉";
+                document.getElementById('discount-alert').className = "text-xs text-emerald-600 font-bold";
+            } else {
+                document.getElementById('rabat-info').classList.add('hidden');
+                document.getElementById('discount-alert').innerText = "Min. 5 nocy = 10% rabatu!";
+                document.getElementById('discount-alert').className = "text-xs text-amber-600 font-medium";
+            }
+
+            // 5. Usługi jednorazowe (nie podlegają rabatowi za długość pobytu)
+            const kosztPrania = dane.pranie * CENNIK.pranie;
+
+            // Wynik końcowy (zaokrąglony do pełnych złotych)
+            const ostatecznaSuma = Math.round(sumaDobowa + kosztPrania);
+            document.getElementById('total').innerText = ostatecznaSuma;
+        }
+        
+        calculate(); // Pierwsze wyliczenie przy starcie
+    </script>
+</body>
+</html>
