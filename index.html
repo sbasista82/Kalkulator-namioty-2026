@@ -1,120 +1,266 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kalkulator Przystań Zagać</title>
-<style>
-body{background:#f3f4f6;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:16px;max-width:440px;margin:16px auto}
-.card{background:#fff;padding:24px;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,.1)}
-.row{display:flex;justify-content:space-between;align-items:center;background:#f9fafb;padding:12px;border-radius:12px;margin-bottom:12px}
-.counter{display:flex;align-items:center;gap:12px}
-button{width:40px;height:40px;border:none;border-radius:50%;cursor:pointer;font-size:20px}
-.btn-minus{background:#d1fae5}.btn-plus{background:#059669;color:#fff}
-.value{min-width:24px;text-align:center;font-weight:700}
-.select-box{width:100%;padding:12px;border-radius:12px;margin:12px 0 24px;box-sizing:border-box}
-.summary{text-align:center;border-top:1px dashed #ddd;padding-top:16px;margin-top:20px}
-.total-amount{font-size:42px;font-weight:900}
-.discount-active{display:none;color:#059669;font-weight:700}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Przystań Zagać</title>
+    <style>
+        body {
+            background: #f3f4f6;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            padding: 16px;
+            max-width: 440px;
+            margin: 16px auto;
+        }
+        .card {
+            background: #fff;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .1);
+        }
+        .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f9fafb;
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+        .counter {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        button {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        .btn-minus {
+            background: #d1fae5;
+        }
+        .btn-plus {
+            background: #059669;
+            color: #fff;
+        }
+        .value {
+            min-width: 24px;
+            text-align: center;
+            font-weight: 700;
+        }
+        .select-box {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            margin: 12px 0 12px;
+            box-sizing: border-box;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 24px 0 12px;
+            color: #1f2937;
+            border-bottom: 2px solid #f3f4f6;
+            padding-bottom: 6px;
+        }
+        .summary {
+            text-align: center;
+            border-top: 1px dashed #ddd;
+            padding-top: 16px;
+            margin-top: 20px;
+        }
+        .sub-total {
+            font-size: 14px;
+            color: #4b5563;
+            margin-bottom: 4px;
+        }
+        .total-amount {
+            font-size: 42px;
+            font-weight: 900;
+            color: #111827;
+        }
+        .discount-active {
+            display: none;
+            color: #059669;
+            font-weight: 700;
+        }
+    </style>
 </head>
 <body>
-<div class="card">
-<h1>🏕️ Przystań Zagać</h1>
+    <div class="card">
+        <h1>🏕️ Przystań Zagać</h1>
 
-<div class="row">
-<div><strong>Liczba nocy</strong><br><span id="discount-alert">Min. 5 nocy = 10% rabatu!</span></div>
-<div class="counter">
-<button type="button" id="btn-dni-minus">-</button>
-<span id="v-dni" class="value">1</span>
-<button type="button" id="btn-dni-plus" class="btn-plus">+</button>
-</div>
-</div>
+        <div class="section-title">Nocleg i pobyt</div>
 
-<div class="row"><div>Dorośli (20 zł/doba)</div><div class="counter"><button type="button" id="btn-dorosli-minus">-</button><span id="v-dorosli" class="value">0</span><button type="button" id="btn-dorosli-plus" class="btn-plus">+</button></div></div>
+        <div class="row">
+            <div><strong>Liczba nocy</strong><br><span id="discount-alert">Min. 5 nocy = 10% rabatu!</span></div>
+            <div class="counter">
+                <button type="button" id="btn-dni-minus" class="btn-minus">-</button>
+                <span id="v-dni" class="value">1</span>
+                <button type="button" id="btn-dni-plus" class="btn-plus">+</button>
+            </div>
+        </div>
 
-<div class="row"><div>Dzieci 3-12 lat (10 zł/doba)</div><div class="counter"><button type="button" id="btn-dzieci-minus">-</button><span id="v-dzieci" class="value">0</span><button type="button" id="btn-dzieci-plus" class="btn-plus">+</button></div></div>
+        <div class="row"><div>Dorośli (20 zł/doba)</div><div class="counter"><button type="button" id="btn-dorosli-minus" class="btn-minus">-</button><span id="v-dorosli" class="value">0</span><button type="button" id="btn-dorosli-plus" class="btn-plus">+</button></div></div>
 
-<div class="row"><div>Dzieci do 3 lat (gratis)</div><div class="counter"><button type="button" id="btn-bobasy-minus">-</button><span id="v-bobasy" class="value">0</span><button type="button" id="btn-bobasy-plus" class="btn-plus">+</button></div></div>
+        <div class="row"><div>Dzieci 3-12 lat (10 zł/doba)</div><div class="counter"><button type="button" id="btn-dzieci-minus" class="btn-minus">-</button><span id="v-dzieci" class="value">0</span><button type="button" id="btn-dzieci-plus" class="btn-plus">+</button></div></div>
 
-<select id="v-nocleg" class="select-box">
-<option value="brak">Brak - 0 zł</option>
-<option value="maly_namiot">Mały namiot - 10 zł</option>
-<option value="duzy_namiot">Duży namiot - 20 zł</option>
-<option value="przyczepa">Przyczepa - 30 zł</option>
-<option value="camper">Camper - 30 zł</option>
-</select>
+        <div class="row"><div>Dzieci do 3 lat (gratis)</div><div class="counter"><button type="button" id="btn-bobasy-minus" class="btn-minus">-</button><span id="v-bobasy" class="value">0</span><button type="button" id="btn-bobasy-plus" class="btn-plus">+</button></div></div>
 
-<div class="row"><div>Prąd (20 zł/doba)</div><input type="checkbox" id="v-prad"></div>
+        <select id="v-nocleg" class="select-box">
+            <option value="brak">Brak - 0 zł</option>
+            <option value="maly_namiot">Mały namiot - 10 zł</option>
+            <option value="duzy_namiot">Duży namiot - 20 zł</option>
+            <option value="przyczepa">Przyczepa - 30 zł</option>
+            <option value="camper">Camper - 30 zł</option>
+        </select>
 
-<div class="row"><div>Pranie (30 zł)</div><div class="counter"><button type="button" id="btn-pranie-minus">-</button><span id="v-pranie" class="value">0</span><button type="button" id="btn-pranie-plus" class="btn-plus">+</button></div></div>
+        <div class="row"><div>Prąd (20 zł/doba)</div><input type="checkbox" id="v-prad"></div>
 
-<div class="summary">
-<div id="rabat-info" class="discount-active">🎉 Zastosowano rabat 10%</div>
-<div class="total-amount"><span id="total">0</span> zł</div>
-</div>
-</div>
+        <div class="row"><div>Pranie (30 zł)</div><div class="counter"><button type="button" id="btn-pranie-minus" class="btn-minus">-</button><span id="v-pranie" class="value">0</span><button type="button" id="btn-pranie-plus" class="btn-plus">+</button></div></div>
 
-<script>
-(function(){
-const CENNIK={dorosly:20,dzieci:10,maly_namiot:10,duzy_namiot:20,przyczepa:30,camper:30,brak:0,prad:20,pranie:30};
-const dane={dni:1,dorosli:0,dzieci:0,bobasy:0,pranie:0};
+        <!-- NOWA SEKCJA: SPŁYW KAJAKOWY -->
+        <div class="section-title">🚣 Spływ kajakowy</div>
 
-function updateView(){
- document.getElementById('v-dni').textContent=dane.dni;
- document.getElementById('v-dorosli').textContent=dane.dorosli;
- document.getElementById('v-dzieci').textContent=dane.dzieci;
- document.getElementById('v-bobasy').textContent=dane.bobasy;
- document.getElementById('v-pranie').textContent=dane.pranie;
-}
+        <select id="v-trasa" class="select-box">
+            <option value="brak">-- Wybierz trasę spływu --</option>
+            <option value="stare_krole">Stare Króle – Zagać (6 km | 1–1,5 h)</option>
+            <option value="kucly">Kucły – Zagać (12 km | 2,5–3,5 h)</option>
+            <option value="pisklaki">Pisklaki – Zagać (24 km | 4,5–6 h)</option>
+            <option value="szostaki">Szostaki – Zagać (27 km | 6–7 h)</option>
+            <option value="osuchy">Osuchy - Zagać (31 km | 7-8 h)</option>
+            <option value="wolka">Zagać - Wólka Biska (7 km | 1,5-2 h)</option>
+            <option value="lazory">Zagać - Łazory (17 km | 3,5-4 h)</option>
+            <option value="harasiuki">Zagać – Harasiuki (23 km | 5–6 h)</option>
+        </select>
 
-function calculate(){
- const dni=dane.dni;
- let suma=(dane.dorosli*CENNIK.dorosly*dni)+
-          (dane.dzieci*CENNIK.dzieci*dni)+
-          (CENNIK[document.getElementById('v-nocleg').value]*dni)+
-          (document.getElementById('v-prad').checked ? CENNIK.prad*dni : 0)+
-          (dane.pranie*CENNIK.pranie);
+        <div class="row"><div>Kajak 1-osobowy</div><div class="counter"><button type="button" id="btn-kajak1-minus" class="btn-minus">-</button><span id="v-kajak1" class="value">0</span><button type="button" id="btn-kajak1-plus" class="btn-plus">+</button></div></div>
 
- const rabatInfo=document.getElementById('rabat-info');
- const alert=document.getElementById('discount-alert');
+        <div class="row"><div>Kajak 2-osobowy</div><div class="counter"><button type="button" id="btn-kajak2-minus" class="btn-minus">-</button><span id="v-kajak2" class="value">0</span><button type="button" id="btn-kajak2-plus" class="btn-plus">+</button></div></div>
 
- if(dni>=5){
-   suma*=0.9;
-   rabatInfo.style.display='block';
-   alert.textContent='Rabat 10% aktywny!';
- } else {
-   rabatInfo.style.display='none';
-   alert.textContent='Min. 5 nocy = 10% rabatu!';
- }
+        <div class="summary">
+            <div id="rabat-info" class="discount-active">🎉 Zastosowano rabat 10% na pobyt</div>
+            <div class="sub-total">Pobyt: <span id="total-pobyt">0</span> zł | Spływ: <span id="total-splyw">0</span> zł</div>
+            <div class="total-amount"><span id="total">0</span> zł</div>
+        </div>
+    </div>
 
- document.getElementById('total').textContent=Math.round(suma);
-}
+    <script>
+        (function() {
+            const CENNIK = {
+                dorosly: 20,
+                dzieci: 10,
+                maly_namiot: 10,
+                duzy_namiot: 20,
+                przyczepa: 30,
+                camper: 30,
+                brak: 0,
+                prad: 20,
+                pranie: 30
+            };
 
-function bindCounter(name,min){
- document.getElementById('btn-'+name+'-plus').addEventListener('click',function(){
-   dane[name]++;
-   updateView(); calculate();
- });
- document.getElementById('btn-'+name+'-minus').addEventListener('click',function(){
-   dane[name]=Math.max(min,dane[name]-1);
-   updateView(); calculate();
- });
-}
+            // Baza danych cennika spływów: [cena 1-os, cena 2-os]
+            const CENNIK_KAJAKOW = {
+                brak: [0, 0],
+                stare_krole: [50, 80],
+                kucly: [70, 110],
+                pisklaki: [90, 140],
+                szostaki: [110, 170],
+                osuchy: [130, 200],
+                wolka: [60, 90],
+                lazory: [100, 150],
+                harasiuki: [100, 140]
+            };
 
-bindCounter('dni',1);
-bindCounter('dorosli',0);
-bindCounter('dzieci',0);
-bindCounter('bobasy',0);
- 
-bindCounter('pranie',0);
+            const dane = {
+                dni: 1,
+                dorosli: 0,
+                dzieci: 0,
+                bobasy: 0,
+                pranie: 0,
+                kajak1: 0,
+                kajak2: 0
+            };
 
-document.getElementById('v-nocleg').addEventListener('change',calculate);
-document.getElementById('v-prad').addEventListener('change',calculate);
+            function updateView() {
+                document.getElementById('v-dni').textContent = dane.dni;
+                document.getElementById('v-dorosli').textContent = dane.dorosli;
+                document.getElementById('v-dzieci').textContent = dane.dzieci;
+                document.getElementById('v-bobasy').textContent = dane.bobasy;
+                document.getElementById('v-pranie').textContent = dane.pranie;
+                document.getElementById('v-kajak1').textContent = dane.kajak1;
+                document.getElementById('v-kajak2').textContent = dane.kajak2;
+            }
 
-updateView();
-calculate();
-})();
-</script>
+            function calculate() {
+                const dni = dane.dni;
+                // 1. Kalkulacja podstawowa za sam pobyt
+                let sumaPobyt = (dane.dorosli * CENNIK.dorosly * dni) +
+                    (dane.dzieci * CENNIK.dzieci * dni) +
+                    (CENNIK[document.getElementById('v-nocleg').value] * dni) +
+                    (document.getElementById('v-prad').checked ? CENNIK.prad * dni : 0) +
+                    (dane.pranie * CENNIK.pranie);
+
+                const rabatInfo = document.getElementById('rabat-info');
+                const alert = document.getElementById('discount-alert');
+
+                // Zastosowanie rabatu wyłącznie do części pobytowej
+                if (dni >= 5) {
+                    sumaPobyt *= 0.9;
+                    rabatInfo.style.display = 'block';
+                    alert.textContent = 'Rabat 10% aktywny!';
+                } else {
+                    rabatInfo.style.display = 'none';
+                    alert.textContent = 'Min. 5 nocy = 10% rabatu!';
+                }
+
+                // 2. Kalkulacja kosztów spływu kajakowego
+                const wybranaTrasa = document.getElementById('v-trasa').value;
+                const cenyTrasy = CENNIK_KAJAKOW[wybranaTrasa];
+                const sumaSplyw = (dane.kajak1 * cenyTrasy[0]) + (dane.kajak2 * cenyTrasy[1]);
+
+                // 3. Sumowanie całości
+                const ostatecznaSuma = sumaPobyt + sumaSplyw;
+
+                // Wyświetlenie składowych i sumy łącznej
+                document.getElementById('total-pobyt').textContent = Math.round(sumaPobyt);
+                document.getElementById('total-splyw').textContent = Math.round(sumaSplyw);
+                document.getElementById('total').textContent = Math.round(ostatecznaSuma);
+            }
+
+            function bindCounter(name, min) {
+                document.getElementById('btn-' + name + '-plus').addEventListener('click', function() {
+                    dane[name]++;
+                    updateView();
+                    calculate();
+                });
+                document.getElementById('btn-' + name + '-minus').addEventListener('click', function() {
+                    dane[name] = Math.max(min, dane[name] - 1);
+                    updateView();
+                    calculate();
+                });
+            }
+
+            // Podpięcie wszystkich liczników (w tym nowych od kajaków)
+            bindCounter('dni', 1);
+            bindCounter('dorosli', 0);
+            bindCounter('dzieci', 0);
+            bindCounter('bobasy', 0);
+            bindCounter('pranie', 0);
+            bindCounter('kajak1', 0);
+            bindCounter('kajak2', 0);
+
+            document.getElementById('v-nocleg').addEventListener('change', calculate);
+            document.getElementById('v-prad').addEventListener('change', calculate);
+            document.getElementById('v-trasa').addEventListener('change', calculate);
+
+            updateView();
+            calculate();
+        })();
+    </script>
 </body>
 </html>
