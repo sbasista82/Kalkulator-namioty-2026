@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🛶 Checklista – Kajaki i Camping</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+background:#eef3f7;
+color:#333;
+}
+
+.container{
+max-width:1000px;
+margin:30px auto;
+padding:20px;
+}
+
+h1{
+text-align:center;
+color:#0b7285;
+margin-bottom:5px;
+}
+
+.subtitle{
+text-align:center;
+color:#666;
+margin-bottom:25px;
+}
+
+.buttons{
+display:flex;
+justify-content:center;
+gap:10px;
+margin-bottom:25px;
+flex-wrap:wrap;
+}
+
+button{
+border:none;
+background:#0b7285;
+color:white;
+padding:10px 18px;
+border-radius:8px;
+cursor:pointer;
+font-size:15px;
+}
+
+button:hover{
+background:#095a69;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:20px;
+}
+
+section{
+background:white;
+border-radius:14px;
+padding:18px;
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+h2{
+margin-top:0;
+color:#0b7285;
+border-bottom:2px solid #edf1f3;
+padding-bottom:8px;
+}
+
+label{
+display:block;
+padding:6px 0;
+cursor:pointer;
+}
+
+input[type=checkbox]{
+transform:scale(1.15);
+margin-right:10px;
+}
+
+input[type=checkbox]:checked+span{
+text-decoration:line-through;
+color:#999;
+}
+
+.meal{
+margin-bottom:15px;
+}
+
+.meal h3{
+margin-bottom:8px;
+color:#444;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>🛶 Checklista – Kajaki i Camping 🏕️</h1>
+<div class="subtitle">Weekendowy wyjazd</div>
+
+<div class="buttons">
+<button onclick="toggleAll(true)">✔ Zaznacz wszystko</button>
+<button onclick="toggleAll(false)">✖ Wyczyść</button>
+</div>
+
+<div class="grid">
+
+<section>
+<h2>🩹 Apteczka</h2>
+
+<label><input type="checkbox"><span>Octenisept</span></label>
+<label><input type="checkbox"><span>Opatrunki</span></label>
+<label><input type="checkbox"><span>Plastry</span></label>
+<label><input type="checkbox"><span>Leki przeciwbólowe</span></label>
+<label><input type="checkbox"><span>Stoperan</span></label>
+<label><input type="checkbox"><span>Wapno</span></label>
+<label><input type="checkbox"><span>Preparat na ukąszenia</span></label>
+<label><input type="checkbox"><span>Krem do opalania</span></label>
+<label><input type="checkbox"><span>Spray na komary (Bros)</span></label>
+
+</section>
+
+<section>
+
+<h2>🍳 Sprzęt biwakowy</h2>
+
+<label><input type="checkbox"><span>Butla gazowa</span></label>
+<label><input type="checkbox"><span>Kuchenka</span></label>
+<label><input type="checkbox"><span>Garnki</span></label>
+<label><input type="checkbox"><span>Kanister składany z kranikiem</span></label>
+<label><input type="checkbox"><span>Dzbanek filtrujący</span></label>
+<label><input type="checkbox"><span>Pokrowiec na telefon</span></label>
+<label><input type="checkbox"><span>Worki strunowe</span></label>
+<label><input type="checkbox"><span>Bidony z wodą</span></label>
+<label><input type="checkbox"><span>Gotówka</span></label>
+<label><input type="checkbox"><span>Lampki choinkowe</span></label>
+
+</section>
+
+<section>
+
+<h2>🛶 Na spływ</h2>
+
+<label><input type="checkbox"><span>Poddupnik</span></label>
+<label><input type="checkbox"><span>Rękawiczki</span></label>
+<label><input type="checkbox"><span>Plecak wodoodporny / worek</span></label>
+<label><input type="checkbox"><span>Sandały / buty do wody</span></label>
+<label><input type="checkbox"><span>Krem do opalania</span></label>
+<label><input type="checkbox"><span>Czapka</span></label>
+<label><input type="checkbox"><span>Kąpielówki</span></label>
+<label><input type="checkbox"><span>Przekąski</span></label>
+<label><input type="checkbox"><span>Picie</span></label>
+
+</section>
+
+<section>
+
+<h2>🏕️ Spanie</h2>
+
+<label><input type="checkbox"><span>Namiot</span></label>
+<label><input type="checkbox"><span>Poduszki</span></label>
+<label><input type="checkbox"><span>Materace</span></label>
+<label><input type="checkbox"><span>Prześcieradła</span></label>
+<label><input type="checkbox"><span>Lampki</span></label>
+<label><input type="checkbox"><span>Czołówki</span></label>
+<label><input type="checkbox"><span>Piżamy</span></label>
+
+</section>
+
+<section>
+
+<h2>🧼 Higiena</h2>
+
+<label><input type="checkbox"><span>Ręczniki</span></label>
+<label><input type="checkbox"><span>Żel 3w1</span></label>
+<label><input type="checkbox"><span>Szczoteczki do zębów</span></label>
+<label><input type="checkbox"><span>Pasta do zębów</span></label>
+<label><input type="checkbox"><span>Szczotka do włosów</span></label>
+<label><input type="checkbox"><span>Gumki do włosów</span></label>
+<label><input type="checkbox"><span>Papier toaletowy</span></label>
+
+</section>
+
+<section>
+
+<h2>🍽️ Kuchnia</h2>
+
+<label><input type="checkbox"><span>Sztućce</span></label>
+<label><input type="checkbox"><span>Naczynia</span></label>
+<label><input type="checkbox"><span>Miski</span></label>
+<label><input type="checkbox"><span>Deska do krojenia</span></label>
+<label><input type="checkbox"><span>Nóż</span></label>
+<label><input type="checkbox"><span>Miska do mycia naczyń</span></label>
+<label><input type="checkbox"><span>Płyn do naczyń</span></label>
+<label><input type="checkbox"><span>Gąbka</span></label>
+<label><input type="checkbox"><span>Ścierka</span></label>
+<label><input type="checkbox"><span>Patelnia</span></label>
+<label><input type="checkbox"><span>Czajnik</span></label>
+<label><input type="checkbox"><span>Garnek</span></label>
+<label><input type="checkbox"><span>Worki na śmieci</span></label>
+
+</section>
+
+<section>
+
+<h2>👕 Ubrania</h2>
+
+<label><input type="checkbox"><span>Majtki ×2</span></label>
+<label><input type="checkbox"><span>Skarpetki ×2</span></label>
+<label><input type="checkbox"><span>Koszulki ×2</span></label>
+<label><input type="checkbox"><span>Spodenki krótkie</span></label>
+<label><input type="checkbox"><span>Spodnie długie</span></label>
+<label><input type="checkbox"><span>Sweter</span></label>
+<label><input type="checkbox"><span>Kurtka</span></label>
+<label><input type="checkbox"><span>Peleryna przeciwdeszczowa</span></label>
+<label><input type="checkbox"><span>Piżama</span></label>
+<label><input type="checkbox"><span>Klapki</span></label>
+<label><input type="checkbox"><span>Chodaki</span></label>
+
+</section>
+
+<section>
+
+<h2>🔌 Inne</h2>
+
+<label><input type="checkbox"><span>Telefony</span></label>
+<label><input type="checkbox"><span>Ładowarki</span></label>
+<label><input type="checkbox"><span>Leki</span></label>
+<label><input type="checkbox"><span>Sznurek do bielizny</span></label>
+<label><input type="checkbox"><span>Stolik</span></label>
+<label><input type="checkbox"><span>Szafka kuchenna</span></label>
+<label><input type="checkbox"><span>Parasol</span></label>
+<label><input type="checkbox"><span>Plandeka</span></label>
+<label><input type="checkbox"><span>Przedłużacz</span></label>
+<label><input type="checkbox"><span>Haczyki z IKEA</span></label>
+
+</section>
+
+<section>
+
+<h2>🎲 Rozrywka</h2>
+
+<label><input type="checkbox"><span>Dixit</span></label>
+<label><input type="checkbox"><span>Okularki do pływania</span></label>
+<label><input type="checkbox"><span>Piłka</span></label>
+<label><input type="checkbox"><span>Paletki</span></label>
+<label><input type="checkbox"><span>Klej</span></label>
+<label><input type="checkbox"><span>Łatki</span></label>
+<label><input type="checkbox"><span>Spinacze</span></label>
+<label><input type="checkbox"><span>Lodówka turystyczna</span></label>
+<label><input type="checkbox"><span>Koce</span></label>
+<label><input type="checkbox"><span>Hamak</span></label>
+<label><input type="checkbox"><span>Świeczka / spirala na komary</span></label>
+<label><input type="checkbox"><span>Głośnik</span></label>
+<label><input type="checkbox"><span>Sprawdzić ilość wody</span></label>
+
+</section>
+
+<section>
+
+<h2>🍔 Plan posiłków</h2>
+
+<div class="meal">
+<h3>Piątek</h3>
+<label><input type="checkbox"><span>Kiełbaski na kolację</span></label>
+</div>
+
+<div class="meal">
+<h3>Sobota</h3>
+<label><input type="checkbox"><span>Śniadanie – kanapki i parówki</span></label>
+<label><input type="checkbox"><span>Przekąski na kajaki</span></label>
+<label><input type="checkbox"><span>Obiad – Bar Zatoczka</span></label>
+<label><input type="checkbox"><span>Kolacja – kiełbaski / kurczak z ogniska</span></label>
+</div>
+
+<div class="meal">
+<h3>Niedziela</h3>
+<label><input type="checkbox"><span>Śniadanie jak w sobotę</span></label>
+<label><input type="checkbox"><span>Pizza w drodze powrotnej 🍕</span></label>
+</div>
+
+</section>
+
+<section>
+
+<h2>🛒 Zakupy</h2>
+
+<label><input type="checkbox"><span>Nutella</span></label>
+<label><input type="checkbox"><span>Masło orzechowe</span></label>
+<label><input type="checkbox"><span>Dżem</span></label>
+<label><input type="checkbox"><span>Chleb</span></label>
+<label><input type="checkbox"><span>Bułki</span></label>
+<label><input type="checkbox"><span>Konserwa</span></label>
+<label><input type="checkbox"><span>Pasztet</span></label>
+<label><input type="checkbox"><span>Szynka</span></label>
+<label><input type="checkbox"><span>Parówki</span></label>
+<label><input type="checkbox"><span>Mleko UHT</span></label>
+<label><input type="checkbox"><span>Zupki chińskie</span></label>
+<label><input type="checkbox"><span>Kiełbasa</span></label>
+<label><input type="checkbox"><span>Kurczak</span></label>
+<label><input type="checkbox"><span>Kabanosy</span></label>
+<label><input type="checkbox"><span>Ketchup</span></label>
+<label><input type="checkbox"><span>Makaron</span></label>
+<label><input type="checkbox" checked><span>Herbata</span></label>
+<label><input type="checkbox"><span>Cukier</span></label>
+<label><input type="checkbox"><span>Pomidory</span></label>
+<label><input type="checkbox"><span>Ogórki</span></label>
+<label><input type="checkbox"><span>Ogórki kiszone</span></label>
+<label><input type="checkbox"><span>Ogórki konserwowe</span></label>
+
+</section>
+
+</div>
+
+</div>
+
+<script>
+function toggleAll(state){
+document.querySelectorAll('input[type="checkbox"]').forEach(cb=>cb.checked=state);
+}
+</script>
+
+</body>
+</html>
