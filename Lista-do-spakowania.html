@@ -326,9 +326,36 @@ color:#444;
 </div>
 
 <script>
-function toggleAll(state){
-document.querySelectorAll('input[type="checkbox"]').forEach(cb=>cb.checked=state);
+function loadSavedStatus() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach((cb, index) => {
+        const savedValue = localStorage.getItem('chk_' + index);
+        if (savedValue === 'true') {
+            cb.checked = true;
+        }
+    });
 }
+
+function saveStatus() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach((cb, index) => {
+        localStorage.setItem('chk_' + index, cb.checked);
+    });
+}
+
+function toggleAll(state) {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(cb => cb.checked = state);
+    saveStatus();
+}
+
+document.addEventListener('change', function(e) {
+    if (e.target && e.target.type === 'checkbox') {
+        saveStatus();
+    }
+});
+
+window.addEventListener('DOMContentLoaded', loadSavedStatus);
 </script>
 
 </body>
